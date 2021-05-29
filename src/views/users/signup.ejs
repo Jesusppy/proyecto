@@ -1,11 +1,35 @@
 <%- include("../includes/_header") %> 
 
-<form action="/users/signup" method="POST">
-    <input type="email" name="email" placeholder="Write your email" autofocus>
-    <input type="password" name="password" placeholder="Write your password">
-    <button>
-        Send
-    </button>
-</form>
+
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                Account Register
+            </div>
+            <div class="card-body">
+                <form action="/users/signup" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Name" >             
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" placeholder="Email" >
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="Password" >             
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="confirm_password" placeholder="Password" >             
+                    </div>
+                    <div class="form-group">
+                        <button type="Submit" class="btn btn-primary btn-block"> 
+                            SignUp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <%- include("../includes/_footer") %> 

@@ -1,8 +1,10 @@
 <%- include("../includes/_header") %> 
 
     <h1>profile</h1>
-<p><%= text  %> </p>
-
+    <% if (user) { %> 
+<p><%= user.email  %> </p>
+<p><%= user.password  %> </p>
+<% } %> 
 
 
 <%- include("../includes/_footer") %> 
