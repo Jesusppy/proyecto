@@ -12,7 +12,8 @@ router.get('/users/signin', (req,res) => {
 router.post('/users/signin', passport.authenticate('local', {
     successRedirect: '/notes',
     failureRedirect: '/users/signin',
-    failureflash: true
+    failureflash: true,
+    passReqToCallback: true
 }));
 
 router.get('/users/signup', (req, res) => {  
@@ -39,7 +40,6 @@ router.post('/users/signup', async (req,res) => {
             password,
             confirm_password
         });
-        console.log(errors)
      } else {
          const emailUser = await User.findOne({email: email});
          if (emailUser) {
@@ -58,4 +58,8 @@ router.post('/users/signup', async (req,res) => {
         }
   });
 
+router.get('/users/logout', (req,res) => {
+    req.logout();
+    res.redirect('/');
+})
 module.exports = router;

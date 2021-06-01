@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const Task = require('../models/task');
+const { isAuthenticated } = require('../helpers/auth');
 
 router.get('/tasks/list', async(req, res) => {
     const tasks = await Task.find();
@@ -11,7 +12,7 @@ router.get('/tasks/list', async(req, res) => {
     });
 });
 
-router.post('/tasks/add', async(req, res) => {   
+router.post('/tasks/add', async(req, res) => { 
         const task = new Task(req.body);
         await task.save();
         res.redirect('/tasks/list');
