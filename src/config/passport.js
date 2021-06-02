@@ -1,14 +1,14 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
-const User = require('../models/User');
+const Users = require('../models/User');
 
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, email, password, done) => {
-   const user = await User.findOne({email: email});
+   const user = await Users.findOne({email: email});
     if (!user) {
         return done(null, false, req.flash('error', 'Not User found.'));      
     } else {
