@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const User = require('../models/User');
+const Users = require('../models/User');
 
 const passport = require('passport');
 
@@ -41,12 +41,12 @@ router.post('/users/signup', async (req,res) => {
             confirm_password
         });
      } else {
-         const emailUser = await User.findOne({email: email});
+         const emailUser = await Users.findOne({email: email});
          if (emailUser) {
              req.flash('error_msg', 'Email is already in use');
              res.redirect('/users/signup');
          }
-            const newUser = new User({
+            const newUser = new Users({
                 name,
                 email, 
                 password
