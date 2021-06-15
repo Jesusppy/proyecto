@@ -6,6 +6,9 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const passport = require('passport');
+const errorhandler = require('errorhandler')
+
+const multer = require('multer');
 
 
 
@@ -35,6 +38,7 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(multer({dest: path.join(__dirname, '../public/upload/temp')}).single('image'));
 app.use(express.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 app.use(session({
@@ -42,6 +46,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -61,10 +66,11 @@ app.use((req, res, next) => {
 
 //routes
 
-app.use(require('./routes/index'));
-app.use(require('./routes/tasks'));
-app.use(require('./routes/notes'));
-app.use(require('./routes/users'));
+app.use(require('./controllers/imageController'));
+app.use(require('./routes/tasks.routes'));
+app.use(require('./routes/notes.routes'));
+app.use(require('./routes/users.routes'));
+// app.use(require('./routes/images.routes'));
 
 
 // Starting server
