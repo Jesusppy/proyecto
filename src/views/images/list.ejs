@@ -51,8 +51,8 @@
             <div class="row">
                 <% for (let image of images) {%>
                     <div class="col-md-4">
-                        <a href="">
-                            <img src="/public/upload/<%= image.filename %> " alt="">
+                        <a href="/images/<%= image.uniqueId %> ">
+                            <img src="/public/upload/<%= image.filename %> " alt="" class="w-100 h-100 img-thumbnail">
                         </a>
                     </div>
 

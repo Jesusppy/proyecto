@@ -6,7 +6,7 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const passport = require('passport');
-const errorhandler = require('errorhandler')
+const errorhandler = require('errorhandler');
 
 const multer = require('multer');
 
@@ -51,7 +51,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 // Global Variables
