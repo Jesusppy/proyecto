@@ -1,16 +1,20 @@
 const path = require('path');
 const express = require('express');
 const { randomNumber } = require('../helpers/libs');
+const { timeago } = require('../config/helpers');
 const fs = require('fs-extra');
-const { Image } = require('../models');
+const { Image, Comment } = require('../models');
+const md5 = require('md5');
 
 const router = express.Router();
 
-router.get('/images',  (req, res) => {
-    res.render('images/imagenes')
+router.get('/images', async (req,res) => {
+    const images = await Image.find().sort({timestamp: 1});
+    res.render('images/imagenes', {images});
+
 });
 
-router.post('/images', (req, res) => {
+router.post('/images/imagenes', (req, res) => {
     const saveImage = async () => {
         const imgUrl = randomNumber();
         const images = await Image.find({filename : imgUrl});
@@ -30,8 +34,8 @@ router.post('/images', (req, res) => {
                     description: req.body.description
                 });
                 const imageSaved = await newImg.save();
-                //res.redirect('/images');
-                res.send('works');
+                
+                res.redirect('/images/' + imgUrl);
             } else {
                 await fs.unlink(imageTempPath);
                 res.status(500).json({error: 'Only images are allowed'});
@@ -41,14 +45,42 @@ router.post('/images', (req, res) => {
     saveImage();
 });
 
-router.get('/images/list', async (req,res) => {
-    const images = await Image.find().sort({timestamp: 1});
-    res.render('images/list', {images});
+router.get('/images/:image_id', async (req, res) => {
 
+    const image = await Image.findOne({filename: {$regex: req.params.image_id}});
+    if (image) {
+        image.views = image.views + 1;
+        await image.save();
+        const comments = await Comment.find({image_id: image._id});
+        res.render('images/image', {image, timeago,comments});
+    } else {
+        res.redirect('/images');
+    }
 });
-/*  app.post('/images/:image_id', (req, res) => {
-    
+
+router.post('/images/:image_id/comment', async (req, res) => {
+    const image = await Image.findOne({filename: {$regex: req.params.image_id}});
+    if (image) {
+        const newComment = new Comment(req.body);
+        newComment.gravatar = md5(newComment.email);
+        newComment.image_id = image._id;
+        await newComment.save();
+        res.redirect('/images/' + image.uniqueId);
+    } else {
+        res.redirect('/images');
+    }
+}); 
+
+router.post('/images/:image_id/like', async (req, res) => {
+   const image = await Image.findOne({filename: {$regex: req.params.image_id}})
+   if (image) {
+       image.likes = image.likes +1;
+       await image.save();
+       res.json({ likes: image.likes });
+   }
 });
+
+/*  
 
 app.post('/images/:image_id/like',(req, res) => {
    
