@@ -1,0 +1,19 @@
+<% if (sidebar.comments)  {%>
+    <div class="card-mt-2">
+        <div class="card-header">
+            <h5><i class="fas fa-comments"></i> Lastes comments</h5>
+        </div>
+        <div class="card-body">
+            <% for (let c of sidebar.comments) {%>
+                <div class="row">
+                    <div class="col">
+                        <% if(c.image != undefined) { %> <a href="/images/<%= c.image.uniqueId %> "> <% } %> 
+                        <% if(c.image != undefined) { %> <img src="/public/upload/<%= c.image.filename %>" class="img-thumbnail w-70"> <% } %>
+                    </a>
+                    <h1> <%= c.comment %>  </h1>
+                    </div>
+                </div>
+            <% } %>     
+        </div>
+    </div>
+<% } %> 

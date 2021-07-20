@@ -38,17 +38,12 @@
                                     <td><%= tasks[i].title %> </td>
                                     <td><%= tasks[i].description %> </td>
                                     <td>
-                                        <a href="/tasks/turn/<%= tasks[i]._id %>" 
-                                            class="<%= tasks[i].status ? 'btn btn-success' : 'btn btn-dark'%>">Hecha
+                                        <a href="/tasks/turn/<%= tasks[i]._id %>" class="btn btn-success"><i class="fas fa-clipboard-check"></i>
                                         </a>
-                                        <a href="/tasks/delete/<%= tasks[i]._id %>" 
-                                            class="btn btn-danger">
-                                            Eliminar
+                                        <a href="/tasks/delete/<%= tasks[i]._id %>" class="btn btn-danger"><i class="fas fa-trash"></i>
                                         </a>
-                                        <a href="/tasks/edit/<%= tasks[i]._id %>" 
-                                        class="btn btn-info">
-                                        Editar
-                                    </a>
+                                        <a href="/tasks/edit/<%= tasks[i]._id %>"  class="btn btn-info"><i class="fas fa-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                          <%  } %>
@@ -59,5 +54,5 @@
             </div>
         </div>
 
-        <%- include("../includes/footer") %> 
+<%- include("../includes/footer") %> 
  

@@ -1,0 +1,59 @@
+<%- include("../includes/header") %> 
+
+<div class="container">
+    <div class="cold-md-9">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Homework</th>
+                    <th>User</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i< homeworks.length; i++) {%> 
+                    <tr>
+                        <td> <%= i+1 %> </td>
+                        <td><a href="/homeworks/<%= homeworks[i]._id %> " > <%= homeworks[i].title %>
+                        <td> <%= homeworks[i].professor.name %> </td>
+                        <td> <%= homeworks[i].active %> </td>                          
+                        <td>
+                            <a href="/homeworks/turn/<%= homeworks[i]._id %>" 
+                                class="<%= homeworks[i].active ? 'btn btn-success' : 'btn btn-dark'%>">Active
+                            </a>
+                            <a href="/homeworks/edit/<%= homeworks[i]._id %> " class="btn btn-info"> Edit
+                            </a>
+                            <a href="/homeworks/delete/<%= homeworks[i]._id %>" class="btn btn-danger">
+                                Delete
+                            </a>
+                            <a href="/homeworks-list/" class="btn btn-success">
+                                Tarea
+                            </a>
+                        </td>
+                    </tr>
+                <% } %> 
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $('.user-id').change(function(){
+            let id = $(this).data('id');
+            let id = $(this).val();
+            let payload = JSON.stringify({id, id});
+            console.log(payload)
+            $.ajax({
+                url: '/homeworks/edit',
+                type: 'PUT',
+                data: payload,
+                dataType: 'json',
+                contentType: 'application/json',
+            });
+        });
+    });
+</script>
+
+<%- include("../includes/footer") %> 

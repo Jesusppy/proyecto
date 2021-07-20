@@ -11,6 +11,17 @@ router.get('/users/signup', usersController.getSignUp);
 
 router.post('/users/signup', usersController.postSignUp);
 
+router.put('/users/edit', usersController.roleUser);
+
+router.get('/users/:id', usersController.getProfileUser);
+
+router.get('/users/edit/:id', usersController.editProfileUser);
+
+router.put('/users/edit/:id', usersController.updateProfileUser);
+
 router.get('/users/logout', usersController.getLogout);
+
+
+
 
 module.exports = router;

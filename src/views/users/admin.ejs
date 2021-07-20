@@ -1,0 +1,60 @@
+<%- include("../includes/header") %> 
+
+<div class="container">
+    <div class="cold-md-9">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>User</th>
+                    <th>Role</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i=0; i< users.length; i++) {%> 
+                    <tr>
+                        <td> <%= i+1 %> </td>
+                        <td><a href="/users/<%= users[i]._id %> " ><%= users[i].name %> </a> </td>
+                        <td>
+                            <select class="user-role" data-id="<%= users[i].id  %> " value="<%= users[i].role %>">
+                                <option value="student" <% if(users[i].role === 'student') {%>selected<%}%>>Student</option>
+                                <option value="professor" <% if(users[i].role === 'professor') {%>selected<%}%>>Professor</option>
+                                <option value="admin" <% if(users[i].role === 'admin') {%>selected<%}%>>Admin</option>
+                            </select>
+                        </td>
+                        <td>
+
+                            <a href="/home/admin/edit/<%= users[i].id %> " class="btn btn-info">
+                                Edit
+                            </a>
+                            <a href="/home/admin/delete/<%= users[i]._id %>" class="btn btn-danger">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                <% } %> 
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $('.user-role').change(function(){
+            let id = $(this).data('id');
+            let role = $(this).val();
+            let payload = JSON.stringify({id, role});
+            console.log(payload)
+            $.ajax({
+                url: '/users/edit',
+                type: 'PUT',
+                data: payload,
+                dataType: 'json',
+                contentType: 'application/json',
+            });
+        });
+    });
+</script>
+
+<%- include("../includes/footer") %> 

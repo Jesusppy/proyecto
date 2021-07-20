@@ -1,0 +1,34 @@
+<%- include("../includes/header") %> 
+
+
+<div class="col-md-8 mx-auto">
+    <div class="card">
+        <div class="card-header">
+            <h3>Edita tu perfil</h3>
+        </div>
+        <div class="card-body">
+                <form action="/users/edit/<%= user.id %>?_method=PUT" method="POST">
+                        <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group">
+                            <input type="text" name="name" class="form-control" placeholder="Cambiar nombre" value="<%= user.name %>">                    
+                        </div>
+                        <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Cambiar email" value="<%= user.email %>">                    
+                        </div>
+                        <input type="hidden" name="_method" value="PUT">
+                            <div class="form-group">
+                            <input type="text" name="exp" class="form-control" placeholder="Cambiar expediente" value="<%= user.exp %>">                    
+                        </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<%- include("../includes/footer") %> 

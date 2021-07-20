@@ -1,24 +1,26 @@
 const path = require('path');
 const express = require('express');
+const { isAuthenticated } = require('../helpers/auth');
 const { randomNumber } = require('../helpers/libs');
 const { timeago } = require('../config/helpers');
 const fs = require('fs-extra');
 const { Image, Comment } = require('../models');
 const md5 = require('md5');
 const sidebar = require('../helpers/sidebar');
+const images = require('../helpers/images');
 const router = express.Router();
 
 
-router.get('/images', async (req, res) => {
+router.get('/images', isAuthenticated, async (req, res) => {
     const images = await Image.find().sort({ timestamp: -1 });
     let viewModel = { images: [] };
     viewModel.images = images;
-    image = await sidebar(viewModel);
+    viewModel = await sidebar(viewModel);
     console.log(viewModel);
     res.render('images/imagenes', viewModel);
 });
 
-router.post('/images/imagenes', (req, res) => {
+router.post('/images/imagenes',isAuthenticated,  (req, res) => {
     const saveImage = async () => {
         const imgUrl = randomNumber();
         const images = await Image.find({ filename: imgUrl });
@@ -49,7 +51,7 @@ router.post('/images/imagenes', (req, res) => {
     saveImage();
 });
 
-router.get('/images/:image_id', async (req, res) => {
+router.get('/images/:image_id',isAuthenticated,  async (req, res) => {
     let viewModel = { image: {}, comments: {} };
     const image = await Image.findOne({ filename: { $regex: req.params.image_id } });
     if (image) {
@@ -60,13 +62,13 @@ router.get('/images/:image_id', async (req, res) => {
         viewModel.comments = comments;
         viewModel = await sidebar(viewModel);
 
-        res.render('images/image', { viewModel, timeago });
+        res.render('images/image', {  timeago, ...viewModel });
     } else {
         res.redirect('/images');
     }
 });
 
-router.post('/images/:image_id/comment', async (req, res) => {
+router.post('/images/:image_id/comment',isAuthenticated,  async (req, res) => {
     const image = await Image.findOne({ filename: { $regex: req.params.image_id } });
     if (image) {
         const newComment = new Comment(req.body);
@@ -79,7 +81,7 @@ router.post('/images/:image_id/comment', async (req, res) => {
     }
 });
 
-router.post('/images/:image_id/like', async (req, res) => {
+router.post('/images/:image_id/like',isAuthenticated,  async (req, res) => {
     const image = await Image.findOne({ filename: { $regex: req.params.image_id } })
     if (image) {
         image.likes = image.likes + 1;
@@ -90,7 +92,7 @@ router.post('/images/:image_id/like', async (req, res) => {
     }
 });
 
-router.delete('/images/:image_id', async (req, res) => {
+router.delete('/images/:image_id',isAuthenticated,  async (req, res) => {
     const image = await Image.findOne({ filename: { $regex: req.params.image_id } })
     if (image) {
         await fs.unlink(path.resolve('./src/public/upload/' + image.filename));

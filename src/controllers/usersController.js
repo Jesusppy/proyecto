@@ -9,7 +9,7 @@ exports.getSignIn = (req,res) => {
 };
 
 exports.postSignIn = passport.authenticate('local', {
-    successRedirect: '/notes',
+    successRedirect: '/home',
     failureRedirect: '/users/signin',
     failureflash: true,
     passReqToCallback: true
@@ -20,7 +20,7 @@ exports.getSignUp = (req, res) => {
 };
 
 exports.postSignUp = async (req,res) => {
-    const { name, email, password, confirm_password } = req.body;
+    const { name, email,exp, password, confirm_password } = req.body;
     const errors = [];
     if (name.length <= 0) {
         errors.push({ text: 'Please insert your name'});
@@ -35,6 +35,7 @@ exports.postSignUp = async (req,res) => {
         res.render('users/signup', {
             errors,
             name,
+            exp,
             email,
             password,
             confirm_password
@@ -47,7 +48,8 @@ exports.postSignUp = async (req,res) => {
         }
             const newUser = new Users({
                 name,
-                email, 
+                email,
+                exp,
                 password
             });
             newUser.password = await newUser.encryptPassword(password);
@@ -56,8 +58,35 @@ exports.postSignUp = async (req,res) => {
             res.redirect('/users/signin');
         }
 };
+ 
 
-exports.getLogout = (req,res) => {
+exports.roleUser = async (req, res) => {
+    const id = req.body.id.trim();
+    const role = req.body.role;
+    await Users.findByIdAndUpdate(id, {role});
+    res.json({})
+};
+
+exports.getProfileUser = async (req, res) => {
+    const id = req.params.id;
+    const user = await Users.findById(id);
+    res.render('users/profile', {user});
+};
+
+exports.editProfileUser = async (req, res) => { 
+    const { id } = req.params;
+    const user = await Users.findById(id);
+    res.render('users/edit', {user});
+    console.log(user);
+};
+
+exports.updateProfileUser = async (req, res) => {
+    const { id } = req.params;
+    await Users.updateOne({_id: id}, req.body);
+    res.redirect('/users/' + id);
+};
+
+exports.getLogout = (req, res) => {
     req.logout();
     res.redirect('/');
 };

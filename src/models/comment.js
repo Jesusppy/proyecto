@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model} = require('mongoose');
 const ObjectId = Schema.ObjectId;
 
 const CommentSchema = new Schema({
@@ -10,5 +10,13 @@ const CommentSchema = new Schema({
     timestamp: { type: Date, default: Date.now}
 
 });
+
+CommentSchema.virtual('image')
+    .set(function (image) {
+        this._image = image;
+    })
+    .get(function () {
+        return this._image;   
+    });
 
 module.exports = model('Comment', CommentSchema);

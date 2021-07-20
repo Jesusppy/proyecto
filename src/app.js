@@ -7,7 +7,6 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const passport = require('passport');
 const errorhandler = require('errorhandler');
-
 const multer = require('multer');
 
 
@@ -66,6 +65,8 @@ app.use((req, res, next) => {
 
 //routes
 
+app.use(require('./routes/homework.routes'));
+app.use(require('./routes/home.routes'));
 app.use(require('./controllers/imageController'));
 app.use(require('./routes/tasks.routes'));
 app.use(require('./routes/notes.routes'));

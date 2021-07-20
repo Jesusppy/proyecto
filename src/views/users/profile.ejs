@@ -1,10 +1,19 @@
 <%- include("../includes/header") %> 
 
-    <h1>profile</h1>
-    <% if (user) { %> 
-<p><%= user.email  %> </p>
-<p><%= user.password  %> </p>
-<% } %> 
-
+<div class="container"> 
+    <h1>Profile del Usuario</h1> 
+    <div class="datails"> 
+      <div class="card text-xs-center"> 
+          <br> 
+          <div class="card-block"> 
+            <h4 class="card-title d-flex justify-content-between align-items-center">Detalles de Usuario <a href="/users/edit/<%= user._id %>"><i class="far fa-edit"></i></a></h4> 
+            <p class="card-text"> 
+                <strong>Name</strong>: <%= user.name%>  <br> 
+                <strong>Email</strong>: <%= user.email %> <br>
+                <strong>Expediente</strong>: <%= user.exp %> <br>
+          </div> 
+      </div> 
+    </div> 
+ </div>
 
 <%- include("../includes/footer") %> 

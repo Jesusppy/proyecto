@@ -8,7 +8,10 @@
             <div class="collapse navbar-collapse" id="navbarText">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  <a class="nav-link active" aria-current="page" href="/home"><i class="fas fa-home"></i> </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/images"><i class="fas fa-comments"></i></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/about">About</a>
@@ -21,10 +24,11 @@
                           Actions
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="/tasks/list">Tasks</a></li>
-                          <li><a class="dropdown-item" href="/notes">Notes</a></li>
+                          <li><a class="dropdown-item" href="/tasks/list"><i class="fas fa-tasks"></i>  Tareas</a></li>
+                          <li><a class="dropdown-item" href="/notes"><i class="far fa-comment-alt"></i>  Notas</a></li>
+                          <li><a class="dropdown-item" href="/users/<%= user._id %> "><i class="fas fa-user-circle"></i>  Perfil</a></li>
                           <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
+                          <li><a class="dropdown-item" href="/users/signin">Logout</a></li>
                         </ul>
                     </li>
                  <% } else { %> 

@@ -1,0 +1,38 @@
+<%- include("../includes/header") %> 
+
+<div class="container">
+    <div class="row">
+            <!-- LIST -->
+            <div class="col-md-8">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Titulo</th>
+                            <th>Descripcion</th>
+                            <th>Fecha de entrega</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < homeworks.length; i++) { %>
+                            <tr>
+                                <td><%= i + 1 %> </td>
+                                <td><a href="/homeworks/<%= homeworks[i]._id %> " > <%= homeworks[i].title %> 
+                                </a> </td>
+                                <td><%= homeworks[i].description %> </td>
+                                <td><%= homeworks[i].end %> </td>
+                                <td>
+                                    <a href="/home" class="btn btn-success"><i class="fas fa-clipboard-check">Done</i>
+                                    </a>   
+                                </td>
+                            </tr>
+                     <%  } %>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+
+<%- include("../includes/footer") %>

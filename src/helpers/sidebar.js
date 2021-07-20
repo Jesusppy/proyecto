@@ -3,7 +3,7 @@ const Images = require('./images');
 const Comments = require('./comments');
 
 
-module.exports = async (viewModel) => {
+module.exports = async viewModel => {
 
     const results = await Promise.all([
         Stats(),

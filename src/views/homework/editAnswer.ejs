@@ -1,0 +1,94 @@
+<%- include("../includes/header") %> 
+
+
+<div class="col-md-8">
+    <div class="class-header bg-dark text-white">
+         <h5><i class="fas fa-list"></i>Tarea disponible </h5>
+    </div>
+    <div class="card text-white bg-primary mb-8" >
+        <div class="card-body">
+            <h5 class="card-title">Titulo: <%= homework.title %></h5> 
+          <p class="card-text"> Descripcion: <%= homework.description %></p>
+          <p class="card-text"> Fecha de publicacion: <%= timeago(homework.timestamp) %></p>  
+        </div>
+    </div>
+    
+      <embed src="/public/upload/<%= homework.file.path  %> " width="100%" height="375" 
+      type="application/pdf">
+
+</div>
+
+<div class="col-md-4">
+    <div class="card-header bg-dark">
+        <h3 class="card-title text-white">
+            <i class="fas fa-tasks"></i> Respuesta a esta tarea
+        </h3>
+        <% if (answers.length > 0 ) { %> 
+        <% for(var i = 0; i < answers.length; i++) { %>
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Titulo: <%= answers[i].title%></h5>
+                <h5 class="card-title">Description: <%= answers[i].description %></h5>
+            </div>
+          </div>
+          <% } %> 
+          <% } else { %>
+            <div class="row">
+                <div class="col-sm-6">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">¡No hay respuestas aún</h5>
+                      <p class="card-text">Añade una respuesta antes de que finalice el tiempo de entrega</p>
+
+                    </div>
+                  </div>
+                </div>
+
+            <% } %>  
+    </div>
+
+</div>
+<div class="col-md-8">
+    <div class="card mb-8">
+    <div class="card-header bg-dark">
+        <h3 class="card-title text-white">
+            <i class="fas fa-tasks"></i> Escriba su respuesta
+        </h3>
+    </div>
+</div>
+
+        <!--FORM-->
+                <div class="card-body">
+                        <div class="card-body">
+                            <form action="/homeworks/<%= homework._id %>" method="POST">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <input type="text" name="title" placeholder="Insertar un titulo para la tarea" class="form-control">
+                                    </div> 
+                                <div class="form-group">
+                                    <textarea name="description" rows="2" class="form-control" placeholder="Descripcion de la tarea" required></textarea>
+                                </div>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="image" class="custom-file-input" id="inputGroupFile04"
+                                                aria-describedby="inputGroupFileAddon04">
+                                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <div class="form-group">
+                                <button class="btn btn-success mb-4">
+                                    <i class="fa fa-upload"></i>Listo
+                                </button>
+                            </div>
+                            </form>
+                        </div>
+                </div>
+</div>
+
+
+
+
+
+<%- include("../includes/footer") %>
