@@ -19,6 +19,6 @@ router.put('/homeworks/edit/:id',isAuthenticated, homeworkController.putEditHome
 
 router.delete('/homeworks/delete/:id', isAuthenticated, homeworkController.deleteHomework);
 
-// router.get('/homeworks/watch/:id', isAuthenticated, homeworkController.getWatchingHomework);
+router.get('/homeworks/review/:id', isAuthenticated, homeworkController.getAnswerReview);
 
 module.exports = router;

@@ -1,70 +1,85 @@
-<%- include("../includes/header") %> 
+<%- include("../includes/header") %>
 
-<div class="container">
-    <div class="cold-md-9">
-        <% if (homeworks.length>0) {%>
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Homework</th>
-                    <th>User</th>
-                    <th>Options</th>
-                </tr>
-            </thead>
-            <tbody>
-                 
-                <% for (var i=0; i< homeworks.length; i++) {%> 
-                    <tr>
-                        <td> <%= i+1 %> </td>
-                        <td><a href="/homeworks/<%= homeworks[i]._id %> " > <%= homeworks[i].title %>
-                        <td> <%= homeworks[i].professor.name %> </td>
-                        <td> <%= homeworks[i].active %> </td>                          
-                        <td>
-                            <a href="/homeworks/turn/<%= homeworks[i]._id %>" 
-                                class="<%= homeworks[i].active ? 'btn btn-success' : 'btn btn-dark'%>">Active
-                            </a>
-                            <a href="/homeworks/edit/<%= homeworks[i]._id %> " class="btn btn-info"> Edit
-                            </a>
-                            <form action="/homeworks/delete/<%= homeworks[i]._id %>?_method=DELETE" method="POST">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger btn-block btn-sm" type="submit">Delete
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    <% } %> 
-                <%} else {%>
-                    <div class="card mx-auto">
-                        <div class="card-body">
-                            <h1>Hola <%= user.name %>
-                            </h1>
-                            <p class="lead">No hay tareas aun</p>
-                            <a href="homework/new-homework" class="btn btn-success btn-block">Create one!</a>
-                        </div>
-                    </div>
-                <% } %>
-            </tbody>
-        </table>
+    <div class="container">
+        <div class="cold-md-9">
+            <% if (homeworks.length>0) {%>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Homework</th>
+                            <th>User</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (var i=0; i< homeworks.length; i++) {%>
+                            <tr>
+                                <td>
+                                    <%= i+1 %>
+                                </td>
+                                <td><a href="/homeworks/<%= homeworks[i]._id %> ">
+                                        <%= homeworks[i].title %>
+                                <td>
+                                    <%= homeworks[i].professor.name %>
+                                </td>
+                                <td>
+                                    <%= homeworks[i].active %>
+                                </td>
+                                <td>
+                                    <a href="/homeworks/turn/<%= homeworks[i]._id %>"
+                                        class="<%= homeworks[i].active ? 'btn btn-success' : 'btn btn-dark'%>">Active
+                                    </a>
+                                    <a href="/homeworks/edit/<%= homeworks[i]._id %> " class="btn btn-info"> Edit
+                                    </a>
+                                    <form action="/homeworks/delete/<%= homeworks[i]._id %>?_method=DELETE"
+                                        method="POST">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button class="btn btn-danger btn-block btn-sm" type="submit">Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% } %>
+                            <div class="card mx-auto">
+                                <div class="card-body">
+                                    </h1>
+                                    <p class="lead">Añadir nueva asignación</p>
+                                    <a href="homework/new-homework" class="btn btn-success btn-block">Añadir</a>
+                                </div>
+                            </div>
+                                <%} else {%>
+                                    <div class="card mx-auto">
+                                        <div class="card-body">
+                                            <h1>Hola <%= user.name %>
+                                            </h1>
+                                            <p class="lead">No hay tareas aun</p>
+                                            <a href="homework/new-homework" class="btn btn-success btn-block">Create
+                                                one!</a>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                    </tbody>
+                </table>
+        </div>
     </div>
-</div>
 
-<script>
-    $(function(){
-        $('.user-id').change(function(){
-            let id = $(this).data('id');
-            let id = $(this).val();
-            let payload = JSON.stringify({id, id});
-            console.log(payload)
-            $.ajax({
-                url: '/homeworks/edit',
-                type: 'PUT',
-                data: payload,
-                dataType: 'json',
-                contentType: 'application/json',
+    <script>
+        $(function () {
+            $('.user-id').change(function () {
+                let id = $(this).data('id');
+                let id = $(this).val();
+                let payload = JSON.stringify({ id, id });
+                console.log(payload)
+                $.ajax({
+                    url: '/homeworks/edit',
+                    type: 'PUT',
+                    data: payload,
+                    dataType: 'json',
+                    contentType: 'application/json',
+                });
             });
         });
-    });
-</script>
+    </script>
 
-<%- include("../includes/footer") %> 
+    <%- include("../includes/footer") %>

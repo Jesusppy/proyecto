@@ -1,72 +1,93 @@
-<%- include("../includes/header") %> 
+<%- include("../includes/header") %>
 
-<div class="col-md-8">
-    <div class="class-header bg-dark text-white">
-         <h5><i class="fas fa-list"></i>Tarea disponible </h5>
-    </div>
-    <div class="card text-white bg-primary mb-8" >
-        <div class="card-body">
-            <h5 class="card-title">Titulo: <%= homework.title %><a href="/homeworks/edit/<%= homework._id %> "><i class="far fa-edit"></i></a></h5>
-            <p class="card-text"> Descripcion: <%= homework.description %></p>
-            <p class="card-title"> Estado: <%= homework.active %></p>
-            <p class="card-title"> Fecha de inicio: <%= homework.start %>  </p>
-            <p class="card-title"> Fecha de culminacion: <%= homework.end %>  </p>
-          
-          
-          <div class="form-group">
-            <div class="input-group">
-                <div class="custom-file">
-                 <input type="file" name="image" class="custom-file-input" id="inputGroupFile04"
-                        aria-describedby="inputGroupFileAddon04">
-                <label class="custom-file-label" for="inputGroupFile04">Seleccionar archivo</label>
+    <div class="col-md-8">
+        <div class="class-header bg-dark text-white">
+            <h5><i class="fas fa-list"></i>Asignación disponible </h5>
+        </div>
+        <div class="card text-white bg-primary mb-8">
+            <div class="card-body">
+                <h5 class="card-title">Titulo: <%= homework.title %><a href="/homeworks/edit/<%= homework._id %> "><i
+                                class="far fa-edit"></i></a></h5>
+                <p class="card-text"> Descripcion: <%= homework.description %>
+                </p>
+                <p class="card-title"> Estado: <%= homework.active %>
+                </p>
+                <p class="card-title"> Fecha de inicio: <%= homework.start %>
+                </p>
+                <p class="card-title"> Fecha de culminacion: <%= homework.end %>
+                </p>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="inputGroupFile04"
+                                aria-describedby="inputGroupFileAddon04">
+                            <label class="custom-file-label" for="inputGroupFile04">Seleccionar archivo</label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+
+        <div class="card mb-2">
+            <div class="card-header bg-dark">
+                <h3 class="card-title text-white">
+                    <i class="fas fa-tasks"></i> Respuestas a la tarea
+                </h3>
+            </div>
+            <% if (answers.length> 0) {%>
+                <div class="col-md-8">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col">Expediente</th>
+                                        <th scope="col">Titulo de Tarea </th>
+                                        <th scope="col">Calificacion</th>
+                                    </tr>
+                                </thead>
+                            <tbody>
+                                <% for(var i=0; i < answers.length; i++) { %>
+                                    <tr>
+                                        <td><a href="/users/<%= answers[i].student._id %> ">
+                                                <%= answers[i].student.name %>
+                                            </a> </td>
+                                        <td>
+                                            <%= answers[i].student.exp %> </a>
+                                        </td>
+                                        <td><a href="/homeworks/review/<%= homework._id %> ">
+                                                <%= answers[i].title %>
+                                            </a> </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="number" name="score" placeholder="0/10"
+                                                    class="form-control">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <% } else {%>
+                    <div class="col-md-12">
+                        <div class="card-body text-center">
+                            <p class="card-text">No hay respuestas a la tarea</p>
+                        </div>
+                    </div>
+                    <% } %>
         </div>
-      </div>
-
-
-    <div class="card mb-2">
-    <div class="card-header bg-dark">
-        <h3 class="card-title text-white">
-            <i class="fas fa-tasks"></i> Respuestas a la tarea
-        </h3>
-    </div>
-        <div class="col-md-8">
-            <table class="table">
-                <thead class="thead-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">Usuario</th>
-                        <th scope="col">Expediente</th>
-                        <th scope="col">Titulo de Tarea </th>
-                        <th scope="col">Calificacion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% for(var i = 0; i < answers.length; i++) { %>
-                        <tr>
-                            <td><a href="/users/<%= answers[i].student._id %> " >  <%= answers[i].student.name %></a> </td>
-                            <td><%= answers[i].student.exp %> </a> </td>
-                            <td><a href="/homeworks/<%= answers[i]._id %> "><%= answers[i].title %> </a>  </td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" name="score" placeholder="0/10" class="form-control">
-                                </div>
-                            </td>
-                        </tr>
-                 <%  } %>
-                </tbody>
-                
-            </table>
-        </div>
-
-    </div>
     </div>
 
-    
 
 
 
 
-<%- include("../includes/footer") %> 
+
+    <%- include("../includes/footer") %>
