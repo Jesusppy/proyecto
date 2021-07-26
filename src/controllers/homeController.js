@@ -27,3 +27,8 @@ exports.getHome = async (req, res) => {
     res.render('home');
 };
 
+exports.getIndex = async (req, res) => {
+    res.render('home');
+};
+
+
