@@ -12,7 +12,7 @@
                     <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
                 </div>
                 <div class="form-group">
-                    <textarea name="description" class="form-control" placeholder="Description"></textarea>
+                    <textarea name="description" id="MyID"></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary btn-block" type="submit">
@@ -24,4 +24,12 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
+    });
+    </script>
+
+
 <%- include("../includes/footer") %> 
+

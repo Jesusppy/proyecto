@@ -6,7 +6,7 @@
     </div>
     <div class="card text-white bg-primary mb-8" >
         <div class="card-body">
-            <h5 class="card-title">Titulo: <%= homework.title %></h5> 
+            <h5 class="card-title">Titulo: <%= homework.title %><a href="/homeworks/edit/<%= homework._id %> "><i class="far fa-edit"></i></a></h5>
             <p class="card-text"> Descripcion: <%= homework.description %></p>
             <p class="card-title"> Estado: <%= homework.active %></p>
             <p class="card-title"> Fecha de inicio: <%= homework.start %>  </p>
@@ -25,15 +25,14 @@
         </div>
       </div>
 
-</div>
-<div class="col-md-8">
-    <div class="card mb-4">
+
+    <div class="card mb-2">
     <div class="card-header bg-dark">
         <h3 class="card-title text-white">
             <i class="fas fa-tasks"></i> Respuestas a la tarea
         </h3>
     </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <table class="table">
                 <thead class="thead-dark">
                 <thead>
@@ -47,9 +46,9 @@
                 <tbody>
                     <% for(var i = 0; i < answers.length; i++) { %>
                         <tr>
-                            <td><a href="/homeworks/<%= answers[i]._id %> " > <%= answers[i].student.name %> </a> 
-                            <td><%= answers[i].student.exp %></td>
-                            <td><%= answers[i].description %> </td>
+                            <td><a href="/users/<%= answers[i].student._id %> " >  <%= answers[i].student.name %></a> </td>
+                            <td><%= answers[i].student.exp %> </a> </td>
+                            <td><a href="/homeworks/<%= answers[i]._id %> "><%= answers[i].title %> </a>  </td>
                             <td>
                                 <div class="form-group">
                                     <input type="number" name="score" placeholder="0/10" class="form-control">
@@ -63,8 +62,11 @@
         </div>
 
     </div>
-</div>
+    </div>
 
-</div>
+    
+
+
+
 
 <%- include("../includes/footer") %> 

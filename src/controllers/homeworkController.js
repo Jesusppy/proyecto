@@ -62,24 +62,44 @@ exports.getStatusHomework = async(req, res) => {
 };
 
 exports.postAnswerController = async (req,res) => {
+    const docUrl = randomNumber();
+    const docTempPath = req.file.path;
+    const ext = path.extname(req.file.originalname).toLowerCase();
+    const targetPath = path.resolve(`src/public/upload/${docUrl}${ext}`);
+    let newfile= null;
+    
+    if (ext ==='.pdf' ) {
+        await fs.rename(docTempPath, targetPath);
+        newfile = new Files({
+            path: docUrl + ext,
+        });
+        await newfile.save();
+        
+    } else {
+        await fs.unlink(docTempPath);
+        res.status(500).json({ error: 'Only docs are allowed' });
+    };
+
     const id = req.params.id;
     const newAnswer = new Answers({ 
         homework: id,
         student: req.user._id,
         title: req.body.title,
         description: req.body.description,
-        // file:
+        file: newfile._id,
     });
     await newAnswer.save();
+    console.log(newAnswer);
     res.redirect('/home');
     
 };
 
 exports.getAnswerController = async (req,res) => {
     const id= req.params.id;
-    const answers = await Answers.find({ homework: id} ).populate('student file');
+    //const answers= await Note.find({user : req.user.id}).sort({date: 'desc'}).lean();        
     const homework = await Homeworks.findOne({ _id: id}).populate('professor file');
     if (req.user.role === 'professor' ) {
+        const answers = await Answers.find({ homework: id} ).populate('student file');
         res.render('homework/watchHomework', {
             answers,
             homework,
@@ -87,7 +107,9 @@ exports.getAnswerController = async (req,res) => {
         });
     
     } else if (req.user.role === 'student' ) {
-        res.render('homework/editAnswer', {
+        const answers = await Answers.find({student : req.user.id, homework: id}).populate('student file');
+        console.log(answers);
+        res.render('homework/makeAnswer', {
             answers, 
             homework,
             timeago
@@ -96,10 +118,33 @@ exports.getAnswerController = async (req,res) => {
 };
 };
 
+exports.getEditingHomework = async (req,res) => {
+    const homework = await Homeworks.findOne({ _id: req.params.id}).populate('professor file'); 
+    if (req.user.role === 'professor' ) {
+        res.render('homework/editHomework', {
+            homework,
+            timeago
+        });
+    } else {
+        res.redirect('/home');
+    };
+};
 
-//exports.putAnswerController = async (req, res) => {
-  //  const id = req.params.id;
-   // const answers = await Answers.find({ });
-// };    
 
-// homework/id + answers
+exports.putEditHomework = async (req,res) => {
+    const { title, description, file, data } = req.body;
+    await Homeworks.findByIdAndUpdate(req.params.id, {title, description, file, data}, {new: true});
+    req.flash('success', 'Homework updated');
+    res.redirect('/home');
+};
+    
+exports.deleteHomework = async (req,res) => {
+    const id = req.params.id;
+    await Homeworks.findByIdAndDelete(id);
+    req.flash('success', 'Homework deleted');
+    res.redirect('/home');
+};
+
+
+
+

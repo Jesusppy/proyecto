@@ -10,6 +10,7 @@ const HomeworkSchema = new Schema({
     timestamp: {type: Date, default: Date.now},
     start: {type: Date, default: Date.now},
     end: {type: Date, required: true},
+    score: {type: Number}
 })
 
 module.exports = mongoose.model('Homeworks', HomeworkSchema);

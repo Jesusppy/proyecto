@@ -2,6 +2,7 @@
 
 <div class="container">
     <div class="cold-md-9">
+        <% if (homeworks.length>0) {%>
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
@@ -12,6 +13,7 @@
                 </tr>
             </thead>
             <tbody>
+                 
                 <% for (var i=0; i< homeworks.length; i++) {%> 
                     <tr>
                         <td> <%= i+1 %> </td>
@@ -24,15 +26,24 @@
                             </a>
                             <a href="/homeworks/edit/<%= homeworks[i]._id %> " class="btn btn-info"> Edit
                             </a>
-                            <a href="/homeworks/delete/<%= homeworks[i]._id %>" class="btn btn-danger">
-                                Delete
-                            </a>
-                            <a href="/homeworks-list/" class="btn btn-success">
-                                Tarea
-                            </a>
+                            <form action="/homeworks/delete/<%= homeworks[i]._id %>?_method=DELETE" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger btn-block btn-sm" type="submit">Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
-                <% } %> 
+                    <% } %> 
+                <%} else {%>
+                    <div class="card mx-auto">
+                        <div class="card-body">
+                            <h1>Hola <%= user.name %>
+                            </h1>
+                            <p class="lead">No hay tareas aun</p>
+                            <a href="homework/new-homework" class="btn btn-success btn-block">Create one!</a>
+                        </div>
+                    </div>
+                <% } %>
             </tbody>
         </table>
     </div>

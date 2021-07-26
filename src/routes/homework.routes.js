@@ -13,6 +13,12 @@ router.get('/homeworks/turn/:id', isAuthenticated, homeworkController.getStatusH
 
 router.get('/homeworks/:id', isAuthenticated, homeworkController.getAnswerController);
 
-// router.put('/homeworks/edit:id', isAuthenticated, homeworkController.putAnswerController);
+router.get('/homeworks/edit/:id', isAuthenticated, homeworkController.getEditingHomework);
+
+router.put('/homeworks/edit/:id',isAuthenticated, homeworkController.putEditHomework);
+
+router.delete('/homeworks/delete/:id', isAuthenticated, homeworkController.deleteHomework);
+
+// router.get('/homeworks/watch/:id', isAuthenticated, homeworkController.getWatchingHomework);
 
 module.exports = router;
