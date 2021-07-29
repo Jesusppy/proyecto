@@ -1,4 +1,5 @@
 const path = require('path');
+var showdown  = require('showdown');
 const Note = require('../models/Note');
 
 exports.getAddnotes = (req, res) => {
@@ -32,7 +33,11 @@ exports.postAddnotes =  async (req, res) => {
 };
 
 exports.getAllnotes =  async (req, res) => {
-    const notes = await Note.find({user : req.user.id}).sort({date: 'desc'}).lean();                 
+    const converter = new showdown.Converter();
+    const notes = await Note.find({user : req.user.id}).sort({date: 'desc'}).lean();
+    notes.forEach(function(note, i){
+        notes[i].content = converter.makeHtml(note.description);
+    });          
     res.render('notes/all-notes', {
         notes
     });

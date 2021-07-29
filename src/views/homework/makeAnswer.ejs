@@ -69,18 +69,18 @@
             </h3>
         </div>
 
-        <% if (answers.length> 0 ) { %>
-            <% for(var i=0; i < answers.length; i++) { %>
+
+            <% if (answers) { %>
+
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Titulo: <a href="/homeworks/editAnswer/<%= answers[i]._id%>">
-                                <%= answers[i].title%>
+                        <h5 class="card-title">Titulo: <a href="/homeworks/editAnswer/<%= answers._id%>">
+                                <%= answers.title%>
                             </a></h5>
-                        <h5 class="card-title">Description: <%= answers[i].description %>
+                        <h5 class="card-title">Description: <%= answers.description %>
                         </h5>
                     </div>
                 </div>
-                <% } %>
                     <% } else { %>
                         <div class="row">
                             <div class="col-sm-6">

@@ -100,8 +100,9 @@ exports.getAnswerController = async (req, res) => {
     const id = req.params.id;
     //const answers= await Note.find({user : req.user.id}).sort({date: 'desc'}).lean();        
     const homework = await Homeworks.findOne({ _id: id }).populate('professor file');
-    if (req.user.role === 'professor') {
+    if (req.user.role === 'professor' || req.user.role === 'admin') {
         const answers = await Answers.find({ homework: id }).populate('student file');
+        console.log(answers);
         res.render('homework/watchHomework', {
             answers,
             homework,
@@ -109,20 +110,22 @@ exports.getAnswerController = async (req, res) => {
         });
 
     } else if (req.user.role === 'student') {
-        const answers = await Answers.find({ student: req.user.id, homework: id }).populate('student file');
+        const answers = await Answers.findOne({ student: req.user.id, homework: id }).populate('student file');
         console.log(answers);
         res.render('homework/makeAnswer', {
             answers,
             homework,
             timeago
         });
-        console.log(answers)
+        //console.log(answers)
     };
 };
 
+
+
 exports.getEditingHomework = async (req, res) => {
     const homework = await Homeworks.findOne({ _id: req.params.id }).populate('professor file');
-    if (req.user.role === 'professor') {
+    if (req.user.role === 'professor' && req.user.role === 'admin') {
         res.render('homework/editHomework', {
             homework,
             timeago
@@ -150,16 +153,28 @@ exports.deleteHomework = async (req, res) => {
 exports.getAnswerReview = async (req, res) => {
     const id = req.params.id;
     const homework = await Homeworks.findOne({ _id: id }).populate('professor file');
-    if (req.user.role === 'professor') {
-        const answers = await Answers.find({ homework: id }).populate('student file');
+    const answers = await Answers.find({ homework: id }).populate('student file');
         res.render('homework/reviewAnswer', {
             homework,
             answers,
             timeago
         });
-    };
 };
 
-exports.getEditAnswer = async
+exports.getEditAnswer = async (req, res) => {
+    const id = req.params.id;
+    const answer = await Answers.findById(id).populate('homework student file');
+        res.render('homework/editAnswer', {
+            answer,
+            timeago
+        });
+};
+
+exports.putEditAnswer = async (req, res) => {
+    const { title, description, file, data } = req.body;
+    await Answers.findByIdAndUpdate(req.params.id, { title, description, file, data }, { new: true });
+    req.flash('success_msg', 'Respuesta actualizada');
+    res.redirect('/homeworks');
+};
 
 
