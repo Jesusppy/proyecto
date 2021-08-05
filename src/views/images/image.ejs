@@ -9,8 +9,8 @@
             </button>
         </div>
         <div class="card-body">
-            <p>
-                <%= image.description %>
+            <p class="card-text">
+                <%- image.content %>
             </p>
             <div class="text-center">
                 <img src="/public/upload/<%= image.filename%>" alt="" class="img-fluid">
@@ -49,16 +49,10 @@
             <blockquote id="post-comment">
                 
                 <form action="/images/<%= image.uniqueId %>/comment" method="POST">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="name" placeholder="Name">
-                    </div>
-                    
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="email" placeholder="Email">
-                    </div>
+                    <p class="card-text"> 
 
                     <div class="form-group">
-                        <textarea name="comment" rows="2" class="form-control" placeholder="Your comment"></textarea>
+                        <textarea name="comment" id="MyID" class="form-control" rows="3"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -77,8 +71,8 @@
                                 <img src="http://gravatar.com/avatar/<%= comment.gravatar %>?d=monsterid&s45" alt="">
                             </a>
                             <blockquote class="col">
-                                <p class="lead">
-                                    <%= comment.comment %>
+                                <p class="card-text">
+                                    <%- comment.content %>
                                 </p>
 
                                 <footer class="blockquote-footer">
@@ -92,5 +86,12 @@
         </div>
 
     </div>
+
+    <script>
+        $(document).ready(function() {
+            var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
+        });
+    </script>
+    
 
     <%- include("../includes/footer") %>

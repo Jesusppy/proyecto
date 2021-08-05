@@ -1,5 +1,8 @@
 <%- include("../includes/header") %> 
 
+<% if (homeworks.length > 0) { %>
+    
+
 <div class="container">
     <div class="row">
             <!-- LIST -->
@@ -23,9 +26,12 @@
                                 <td><%= homeworks[i].description %> </td>
                                 <td><%= homeworks[i].end %> </td>
                                 <td>
-                                    <a href="/home" class="btn btn-success"><i class="fas fa-clipboard-check">Done</i>
-                                    </a>   
+                                    <form action="/homeworks/delete/<%= homeworks[i]._id %>?_method=DELETE" method="POST">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <button class="btn btn-danger btn-xs" type="submit">Eliminar</button>
+                                    </form>
                                 </td>
+                                
                             </tr>
                      <%  } %>
                     </tbody>
@@ -34,5 +40,5 @@
             
         </div>
     </div>
-
+<% } %> 
 <%- include("../includes/footer") %>

@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+var showdown  = require('showdown');
 const { isAuthenticated } = require('../helpers/auth');
 const { randomNumber } = require('../helpers/libs');
 const { timeago } = require('../config/helpers');
@@ -16,7 +17,6 @@ router.get('/images', isAuthenticated, async (req, res) => {
     let viewModel = { images: [] };
     viewModel.images = images;
     viewModel = await sidebar(viewModel);
-    console.log(viewModel);
     res.render('images/imagenes', viewModel);
 });
 
@@ -27,7 +27,6 @@ router.post('/images/imagenes',isAuthenticated,  (req, res) => {
         if (images.length > 0) {
             saveImage();
         } else {
-            console.log(imgUrl);
             const imageTempPath = req.file.path;
             const ext = path.extname(req.file.originalname).toLowerCase();
             const targetPath = path.resolve(`src/public/upload/${imgUrl}${ext}`)
@@ -52,13 +51,18 @@ router.post('/images/imagenes',isAuthenticated,  (req, res) => {
 });
 
 router.get('/images/:image_id',isAuthenticated,  async (req, res) => {
+    const converter = new showdown.Converter();
     let viewModel = { image: {}, comments: {} };
     const image = await Image.findOne({ filename: { $regex: req.params.image_id } });
+    image.content = converter.makeHtml(image.description);
     if (image) {
         image.views = image.views + 1;
         viewModel.image = image;
         await image.save();
         const comments = await Comment.find({ image_id: image._id });
+        comments.forEach(comment => {
+            comment.content = converter.makeHtml(comment.comment);
+        });
         viewModel.comments = comments;
         viewModel = await sidebar(viewModel);
 
@@ -72,7 +76,7 @@ router.post('/images/:image_id/comment',isAuthenticated,  async (req, res) => {
     const image = await Image.findOne({ filename: { $regex: req.params.image_id } });
     if (image) {
         const newComment = new Comment(req.body);
-        newComment.gravatar = md5(newComment.email);
+        newComment.user = req.user;
         newComment.image_id = image._id;
         await newComment.save();
         res.redirect('/images/' + image.uniqueId);

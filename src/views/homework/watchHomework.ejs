@@ -16,17 +16,8 @@
                 </p>
                 <p class="card-title"> Fecha de culminacion: <%= homework.end %>
                 </p>
-
-
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="inputGroupFile04"
-                                aria-describedby="inputGroupFileAddon04">
-                            <label class="custom-file-label" for="inputGroupFile04">Seleccionar archivo</label>
-                        </div>
-                    </div>
-                </div>
+                <embed src="/public/upload/<%= homework.file.path  %> " width="100%" height="375"
+                    type="application/pdf">
             </div>
         </div>
 
@@ -47,7 +38,7 @@
                                         <th scope="col">Usuario</th>
                                         <th scope="col">Expediente</th>
                                         <th scope="col">Titulo de Tarea </th>
-                                        <th scope="col">Calificacion</th>
+                                        <th scope="col">Calificación </th>
                                     </tr>
                                 </thead>
                             <tbody>
@@ -59,13 +50,12 @@
                                         <td>
                                             <%= answers[i].student.exp %> </a>
                                         </td>
-                                        <td><a href="/homeworks/review/<%= homework._id %> ">
+                                        <td><a href="/homeworks/review/<%= answers[i]._id %> ">
                                                 <%= answers[i].title %>
                                             </a> </td>
                                         <td>
                                             <div class="form-group">
-                                                <input type="number" name="score" placeholder="0/10"
-                                                    class="form-control">
+                                                <%= answers[i].score %>
                                             </div>
                                         </td>
                                     </tr>

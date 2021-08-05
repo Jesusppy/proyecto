@@ -17,6 +17,8 @@ router.get('/homeworks/edit/:id', isAuthenticated, homeworkController.getEditing
 
 router.put('/homeworks/edit/:id', isAuthenticated, homeworkController.putEditHomework);
 
+router.put('/homeworks/score/:id', isAuthenticated, homeworkController.putScoreAnswer);
+
 router.delete('/homeworks/delete/:id', isAuthenticated, homeworkController.deleteHomework);
 
 router.get('/homeworks/review/:id', isAuthenticated, homeworkController.getAnswerReview);

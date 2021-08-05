@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title">Titulo: <%= homework.title %>
                 </h5>
-                <p class="card-text"> Descripcion: <%= homework.description %>
+                <p class="card-text"> Descripcion: <%- homework.description %>
                 </p>
                 <p class="card-text"> Fecha de publicacion: <%= timeago(homework.timestamp) %>
                 </p>
@@ -34,8 +34,7 @@
                                     class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <textarea name="description" rows="2" class="form-control"
-                                    placeholder="Descripcion de la tarea" required></textarea>
+                                <textarea name="description" id="MyID" ></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">
@@ -77,7 +76,7 @@
                         <h5 class="card-title">Titulo: <a href="/homeworks/editAnswer/<%= answers._id%>">
                                 <%= answers.title%>
                             </a></h5>
-                        <h5 class="card-title">Description: <%= answers.description %>
+                        <h5 class="card-title">Description: <%- answers.content %>
                         </h5>
                     </div>
                 </div>
@@ -98,7 +97,11 @@
 
     </div>
 
-
+    <script>
+        $(document).ready(function() {
+            var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
+        });
+    </script>
 
 
 

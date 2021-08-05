@@ -77,7 +77,6 @@ exports.editProfileUser = async (req, res) => {
     const { id } = req.params;
     const user = await Users.findById(id);
     res.render('users/edit', {user});
-    console.log(user);
 };
 
 exports.updateProfileUser = async (req, res) => {
@@ -86,7 +85,12 @@ exports.updateProfileUser = async (req, res) => {
     res.redirect('/users/' + id);
 };
 
+exports.deleteUser = async (req, res) => {
+    await Users.remove({_id: req.params.id});
+    res.redirect('/homeworks');
+};
+
 exports.getLogout = (req, res) => {
     req.logout();
-    res.redirect('/');
+    res.redirect('/users/signin');
 };

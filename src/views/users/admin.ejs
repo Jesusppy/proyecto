@@ -28,9 +28,12 @@
                             <a href="/home/admin/edit/<%= users[i].id %> " class="btn btn-info">
                                 Edit
                             </a>
-                            <a href="/home/admin/delete/<%= users[i]._id %>" class="btn btn-danger">
-                                Delete
-                            </a>
+                            <form action="/users/delete/<%= users[i]._id %>?_method=DELETE" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger btn-block btn-sm" type="submit">
+                                    Delete
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 <% } %> 
@@ -45,7 +48,6 @@
             let id = $(this).data('id');
             let role = $(this).val();
             let payload = JSON.stringify({id, role});
-            console.log(payload)
             $.ajax({
                 url: '/users/edit',
                 type: 'PUT',

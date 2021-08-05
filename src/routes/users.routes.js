@@ -19,8 +19,9 @@ router.get('/users/edit/:id', usersController.editProfileUser);
 
 router.put('/users/edit/:id', usersController.updateProfileUser);
 
-router.get('/users/logout', usersController.getLogout);
+router.delete('/users/delete/:id', usersController.deleteUser);
 
+router.get('/auth/logout', usersController.getLogout);
 
 
 

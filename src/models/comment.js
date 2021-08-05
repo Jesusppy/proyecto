@@ -4,6 +4,7 @@ const ObjectId = Schema.ObjectId;
 const CommentSchema = new Schema({
     image_id: {type: ObjectId},
     email: { type: String},
+    user: { type: ObjectId, ref: 'User' }, 
     name: { type: String},
     gravatar: { type: String},
     comment: {type: String},

@@ -28,14 +28,14 @@
                           <li><a class="dropdown-item" href="/users/<%= user._id %> "><i class="fas fa-user-circle"></i>  Perfil</a></li>
                           <% if(user.role === 'admin') { %>
                             <li><a class="dropdown-item" href="/homeworks"><i class="fas fa-cogs"></i>  Administración</a></li>
-                            <li><a class="dropdown-item" href="/admin/homeworks"><i class="fas fa-sign-out-alt"></i> Asignaciones</a></li>
+                            <li><a class="dropdown-item" href="/admin/homeworks"><i class="fas fa-tasks"></i></i>  Asignaciones</a></li>
                           <% } else  if (user.role === 'professor' ){%>
-                            <li><a class="dropdown-item" href="/homeworks"><i class="fas fa-sign-out-alt"></i> Asignaciones</a></li>
+                            <li><a class="dropdown-item" href="/admin/homeworks"><i class="fas fa-tasks"></i> Asignaciones</a></li>
                           <% } else {%>
-                            <li><a class="dropdown-item" href="/homeworks"><i class="fas fa-sign-out-alt"></i> Asignaciones</a></li>
+                            <li><a class="dropdown-item" href="/homeworks"><i class="fas fa-tasks"></i> Asignaciones</a></li>
                             <% } %>  
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/users/signin"><i class="fas fa-sign-out-alt"></i>  Cerrar sesión</a></li>     
+                            <li><a class="dropdown-item" href="/auth/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>  
                         </ul>
                     </li>
                  <% } else { %> 

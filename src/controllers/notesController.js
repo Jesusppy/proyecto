@@ -25,8 +25,6 @@ exports.postAddnotes =  async (req, res) => {
         const newNote = new Note({ title, description});
         newNote.user = req.user.id;
         await newNote.save();
-        console.log(newNote);
-        console.log(newNote.user);
         req.flash('success_msg', 'Note added successfully');
         res.redirect('/notes');
     }

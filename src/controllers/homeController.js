@@ -10,7 +10,7 @@ exports.getHomeworks = async (req, res) => {
         res.render('users/admin', {
             users
         });
-    } else if (req.user.role === 'professor' && req.user.role == 'admin') {
+    } else if (req.user.role === 'professor' || req.user.role == 'admin') {
             const homeworks = await Homeworks.find().populate('professor');
             res.render('users/professor', {
             homeworks
@@ -28,7 +28,7 @@ exports.getHomeworks = async (req, res) => {
 };
 
 exports.getAdminHomeworks = async (req,res) => {
-     if (req.user.role === 'professor' && req.user.role == 'admin') {
+     if (req.user.role === 'professor' || req.user.role == 'admin') {
             const homeworks = await Homeworks.find().populate('professor');
             res.render('users/professor', {
             homeworks

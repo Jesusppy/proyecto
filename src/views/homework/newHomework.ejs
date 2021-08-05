@@ -4,7 +4,7 @@
     <div class="col-md-4 mx-auto">
         <div class="card">
             <div class="card-header">
-                Homework
+                    Asignación de Tareas
             </div>
             <div class="card-body">
                 <form action="/homework/new-homework" method="POST" enctype="multipart/form-data">
@@ -12,8 +12,7 @@
                         <input type="text" class="form-control" name="title" placeholder="Insert Title" required>             
                     </div>
                     <div class="form-group">
-                        <textarea name="description" rows="2" class="form-control" placeholder="Insert description"
-                            required></textarea>
+                        <textarea name="description" rows="2"  id="MyID"></textarea>
                     </div>
 
                     <input type="text" name="datefilter" />
@@ -61,5 +60,10 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
+    });
+</script>
 
 <%- include("../includes/footer") %>

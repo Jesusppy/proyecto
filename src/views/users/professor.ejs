@@ -7,9 +7,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Homework</th>
-                            <th>User</th>
-                            <th>Options</th>
+                            <th>Titulo de la Asignación</th>
+                            <th>Usuario</th>
+                            <th>Estado</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,14 +29,14 @@
                                 </td>
                                 <td>
                                     <a href="/homeworks/turn/<%= homeworks[i]._id %>"
-                                        class="<%= homeworks[i].active ? 'btn btn-success' : 'btn btn-dark'%>">Active
+                                        class="<%= homeworks[i].active ? 'btn btn-success' : 'btn btn-dark'%>"> Cambiar estado
                                     </a>
-                                    <a href="/homeworks/edit/<%= homeworks[i]._id %> " class="btn btn-info"> Edit
+                                    <a href="/homeworks/edit/<%= homeworks[i]._id %> " class="btn btn-info"> Editar
                                     </a>
                                     <form action="/homeworks/delete/<%= homeworks[i]._id %>?_method=DELETE"
                                         method="POST">
                                         <input type="hidden" name="_method" value="DELETE">
-                                        <button class="btn btn-danger btn-block btn-sm" type="submit">Delete
+                                        <button class="btn btn-danger btn-block btn-sm" type="submit">Eliminar
                                         </button>
                                     </form>
                                 </td>
@@ -45,7 +46,7 @@
                                 <div class="card-body">
                                     </h1>
                                     <p class="lead">Añadir nueva asignación</p>
-                                    <a href="homework/new-homework" class="btn btn-success btn-block">Añadir</a>
+                                    <a href="/homework/new-homework" class="btn btn-success btn-block">Añadir</a>
                                 </div>
                             </div>
                                 <%} else {%>
@@ -53,8 +54,8 @@
                                         <div class="card-body">
                                             <h1>Hola <%= user.name %>
                                             </h1>
-                                            <p class="lead">No hay tareas aun</p>
-                                            <a href="homework/new-homework" class="btn btn-success btn-block">Create
+                                            <p class="lead">No hay Asignaciones aún</p>
+                                            <a href="/homework/new-homework" class="btn btn-success btn-block">Create
                                                 one!</a>
                                         </div>
                                     </div>
