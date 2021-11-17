@@ -14,7 +14,7 @@ function formatStringToDate(start) {
 };
 
 exports.getNewhomework = (req, res) => {
-    res.render('homework/newHomework')
+    res.render('homework/newHomeworkNEW')
 };
 
 exports.postHomeworkController = async (req, res) => {
@@ -104,7 +104,7 @@ exports.getAnswerController = async (req, res) => {
     const homework = await Homeworks.findOne({ _id: id }).populate('professor file');
     if (req.user.role === 'professor' || req.user.role === 'admin') {
         const answers = await Answers.find({ homework: id }).populate('student file');
-        res.render('homework/watchHomework', {
+        res.render('homework/watchHomeworkNEW', {
             answers,
             homework,
             timeago
@@ -117,13 +117,14 @@ exports.getAnswerController = async (req, res) => {
         if (answers) {
             answers.content = converter.makeHtml(answers.description);
         }
-        res.render('homework/makeAnswer', {
+        res.render('homework/makeAnswerNEW', {
             answers,
             homework,
             timeago
         });
     } else {
-        res.render('homework/makeAnswer', {
+        res.render('homework/makeAnswerNEW', {
+            anwers: [],
             homework,
             timeago
         });
@@ -135,7 +136,7 @@ exports.getAnswerController = async (req, res) => {
 exports.getEditingHomework = async (req, res) => {
     const homework = await Homeworks.findOne({ _id: req.params.id }).populate('professor file');
     if (req.user.role === 'professor' || req.user.role === 'admin') {
-        res.render('homework/editHomework', {
+        res.render('homework/EditHomeworkNEW', {
             homework,
             timeago
         });
@@ -200,7 +201,7 @@ exports.getAnswerReview = async (req, res) => {
     const answers = await Answers.findOne({ _id: id }).populate('student file homework');
     const homework = answers.homework;
     answers.content = converter.makeHtml(answers.description);    
-        res.render('homework/reviewAnswer', {
+        res.render('homework/reviewAnswerNEW', {
             homework,
             answers,
             timeago
@@ -210,10 +211,11 @@ exports.getAnswerReview = async (req, res) => {
 exports.getEditAnswer = async (req, res) => {
     const id = req.params.id;
     const answer = await Answers.findById(id).populate('homework student file');
-        res.render('homework/editAnswer', {
+        res.render('homework/editAnswerNEW', {
             answer,
             timeago
         });
+        req.flash('success_msg', 'Respuesta actualizada');
 };
 
 exports.putEditAnswer = async (req, res) => {

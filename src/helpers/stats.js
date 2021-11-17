@@ -26,7 +26,7 @@ async function likesTotalCounter() {
             $group: {
                 _id: '1',
                 likesTotal: { $sum: '$likes'}
-            }
+            },
         }
     ]);
     return result[0].likesTotal;

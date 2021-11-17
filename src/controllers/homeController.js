@@ -12,14 +12,14 @@ exports.getHomeworks = async (req, res) => {
         });
     } else if (req.user.role === 'professor' || req.user.role == 'admin') {
             const homeworks = await Homeworks.find().populate('professor');
-            res.render('users/professor', {
+            res.render('users/professorNEW', {
             homeworks
         });
 
     }else {
         let homeworks  = await Homeworks.find({active: true, start: {"$lte": Date.now()}, end: {"$gt": Date.now()} });
 
-        res.render('homework/answer', {
+        res.render('homework/answerNEW', {
         homeworks
         });
 
@@ -37,12 +37,11 @@ exports.getAdminHomeworks = async (req,res) => {
     }else {
         let homeworks  = await Homeworks.find({active: true, start: {"$lte": Date.now()}, end: {"$gt": Date.now()} });
 
-        res.render('homework/answer', {
+        res.render('homework/answerNEW', {
         homeworks
         });
 
     }
-    res.render('home');
 };
 
 

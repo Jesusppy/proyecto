@@ -2,48 +2,194 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>proyecto</title>
-    <!-- BOOSTRAP 4 CDN -->
-    <link rel="stylesheet" href="https://bootswatch.com/5/yeti/bootstrap.min.css">
-    <!-- Font awesome-->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Edule - eLearning Website Template</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/public/images/favicon.ico">
 
-    <head>
-        <script src="https://kit.fontawesome.com/f8294d8a77.js" crossorigin="anonymous"></script>
-    </head>
+    <!-- CSS
+	============================================ -->
+
+    <!-- Icon Font CSS -->
+    <link rel="stylesheet" href="/public/css/plugins/icofont.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/flaticon.css">
+    <link rel="stylesheet" href="/public/css/plugins/font-awesome.min.css">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="/public/css/plugins/animate.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/public/css/plugins/magnific-popup.css">
+    <link rel="stylesheet" href="/public/css/plugins/nice-select.css">
+    <link rel="stylesheet" href="/public/css/plugins/apexcharts.css">
+    <link rel="stylesheet" href="/public/css/plugins/jqvmap.min.css">
+
+    <!-- Main Style CSS -->
+    <link rel="stylesheet" href="/public/css/style.css">
+    <!-- SCRIPTS-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+    <!-- <link rel="stylesheet" href="/public/css/vendor/plugins.min.css">
+    <link rel="stylesheet" href="/public/css/style.min.css"> -->
 
 </head>
 
+
 <body>
+    <div class="main-wrapper">
 
+        <!-- Header Section Start -->
+        <div class="header-section">
 
-    <%- include("../includes/navigation") %>
-        <!-- SCRIPTS-->
+            <!-- Header Top Start -->
+            <div class="header-top d-none d-lg-block">
+                <div class="container">
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-            crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-            <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-            <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-            
+                    <!-- Header Top Wrapper Start -->
+                    <div class="header-top-wrapper">
 
+                        <!-- Header Top Left Start -->
+                        <div class="header-top-left">
+                            <p>All course 28% off for <a href="#">Liberian people’s.</a></p>
+                        </div>
+                        <!-- Header Top Left End -->
 
-        <!-- Custom code -->
+                        <!-- Header Top Medal Start -->
+                        <div class="header-top-medal">
+                            <div class="top-info">
+                                <p><i class="flaticon-phone-call"></i> <a href="tel:9702621413">(970) 262-1413</a></p>
+                                <p><i class="flaticon-email"></i> <a href="mailto:address@gmail.com">address@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <!-- Header Top Medal End -->
 
-        <script src="/public/js/scripts.js" charset="UTF-8"></script>
+                        <!-- Header Top Right Start -->
+                        <div class="header-top-right">
+                            <ul class="social">
+                                <li><a href="#"><i class="flaticon-facebook"></i></a></li>
+                                <li><a href="#"><i class="flaticon-twitter"></i></a></li>
+                                <li><a href="#"><i class="flaticon-skype"></i></a></li>
+                                <li><a href="#"><i class="flaticon-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                        <!-- Header Top Right End -->
 
-        <div class="container p-4">
-            <div class="row">
-                <div class="col-md-8">
-                        <%- include("../includes/messages") %>
-                        <%- include("../includes/errors") %>
+                    </div>
+                    <!-- Header Top Wrapper End -->
+
                 </div>
-                
+            </div>
+            <!-- Header Top End -->
 
+            <!-- Header Main Start -->
+            <div class="header-main">
+                <div class="container">
+
+                    <!-- Header Main Start -->
+                    <div class="header-main-wrapper">
+
+                        <!-- Header Logo Start -->
+                        <div class="header-logo">
+                            <a href="index.html"><img src="/public/images/logo.png" alt="Logo"></a>
+                        </div>
+                        <!-- Header Logo End -->
+
+                        <!-- Header Menu Start -->
+                        <div class="header-menu d-none d-lg-block">
+                            <ul class="nav-menu">
+                                <li><a href="index.html">Home</a></li>
+                                <li>
+                                    <a href="#">All Course</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="courses.html">Courses</a></li>
+                                        <li><a href="courses-details.html">Courses Details</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Pages </a>
+                                    <ul class="sub-menu">
+                                        <li><a href="about.html">About</a></li>
+                                        <li><a href="register.html">Register</a></li>
+                                        <li><a href="login.html">Login</a></li>
+                                        <li><a href="faq.html">FAQ</a></li>
+                                        <li><a href="404-error.html">404 Error</a></li>
+                                        <li><a href="after-enroll.html">After Enroll</a></li>
+                                        <li><a href="courses-admin.html">Instructor Dashboard (Course List)</a></li>
+                                        <li><a href="overview.html">Instructor Dashboard (Performance)</a></li>
+                                        <li><a href="students.html">Students</a></li>
+                                        <li><a href="reviews.html">Reviews</a></li>
+                                        <li><a href="engagement.html">Course engagement</a></li>
+                                        <li><a href="traffic-conversion.html">Traffic & conversion</a></li>
+                                        <li><a href="messages.html">Messages</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Blog</a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a href="#">Blog</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="blog-grid.html">Blog</a></li>
+                                                <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                                                <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="#">Blog Details</a>
+                                            <ul class="sub-menu">
+                                                <li><a href="blog-details-left-sidebar.html">Blog Details Left Sidebar</a></li>
+                                                <li><a href="blog-details-right-sidebar.html">Blog Details Right Sidebar</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="contact.html">Contact</a></li>
+                            </ul>
+
+                        </div>
+                        <!-- Header Menu End -->
+
+                        <!-- Header Sing In & Up Start -->
+                        <div class="header-sign-in-up d-none d-lg-block">
+                            <ul>
+                                <li><a class="sign-in" href="login.html">Sign In</a></li>
+                                <li><a class="sign-up" href="register.html">Sign Up</a></li>
+                            </ul>
+                        </div>
+                        <!-- Header Sing In & Up End -->
+
+                        <!-- Header Mobile Toggle Start -->
+                        <div class="header-toggle d-lg-none">
+                            <a class="menu-toggle" href="javascript:void(0)">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </a>
+                        </div>
+                        <!-- Header Mobile Toggle End -->
+
+                    </div>
+                    <!-- Header Main End -->
+
+                </div>
+            </div>
+            <!-- Header Main End -->
+
+        </div>
+
+    
