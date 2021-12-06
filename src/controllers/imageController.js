@@ -17,7 +17,7 @@ router.get('/images', isAuthenticated, async (req, res) => {
     let viewModel = { images: [] };
     viewModel.images = images;
     viewModel = await sidebar(viewModel);
-    res.render('images/imagenesNEW', viewModel);
+    res.render('images/imagenes', viewModel);
 });
 
 router.post('/images/imagenes',isAuthenticated,  (req, res) => {
@@ -66,7 +66,7 @@ router.get('/images/:image_id',isAuthenticated,  async (req, res) => {
         viewModel.comments = comments;
         viewModel = await sidebar(viewModel);
 
-        res.render('images/imageNEW', {  timeago, ...viewModel });
+        res.render('images/image', {  timeago, ...viewModel });
     } else {
         res.redirect('/images');
     }

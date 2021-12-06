@@ -1,13 +1,14 @@
 const path = require('path');
 const Users = require('../models/User');
 const Homeworks = require('../models/Homework');
+const { isAuthenticated } = require('../helpers/auth');
 
 const passport = require('passport');
 
 exports.getHomeworks = async (req, res) => {
     if (req.user.role === 'admin' ) {
         const users = await Users.find();
-        res.render('users/admin', {
+        res.render('users/adminNEW', {
             users
         });
     } else if (req.user.role === 'professor' || req.user.role == 'admin') {
@@ -30,7 +31,7 @@ exports.getHomeworks = async (req, res) => {
 exports.getAdminHomeworks = async (req,res) => {
      if (req.user.role === 'professor' || req.user.role == 'admin') {
             const homeworks = await Homeworks.find().populate('professor');
-            res.render('users/professor', {
+            res.render('users/professorNEW', {
             homeworks
         });
 
@@ -44,9 +45,18 @@ exports.getAdminHomeworks = async (req,res) => {
     }
 };
 
+exports.getSimulator = async (req, res) => {
+    res.render('simulatorNEW');
+};
+
+
+exports.getAbout = async (req, res) => {
+    res.render('aboutUs');
+};
+
 
 exports.getIndex = async (req, res) => {
-    res.render('home');
+    res.render('homeNEW');
 };
 
 

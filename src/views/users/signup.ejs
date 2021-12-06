@@ -1,5 +1,5 @@
 <%- include("../includes/header") %> 
-
+%
 
 <div class="row">
     <div class="col-md-4 mx-auto">
@@ -35,3 +35,40 @@
 </div>
 
 <%- include("../includes/footer") %> 
+
+<div class="register-login-form">
+    <h3 class="title">Login <span>Now</span></h3>
+    <%- include("../includes/errors") %> 
+
+    
+    <div class="form-wrapper">
+        <form action="/users/signup" method="POST">
+            <!-- Single Form Start -->
+            <div class="single-form">
+                <input type="text" class="form-control" name="name" placeholder="Inserte su nombre" >
+            </div>
+            <!-- Single Form End -->
+            <div class="single-form">
+                <input type="email" class="form-control" name="email" placeholder="Inserte su email" >
+            </div>
+            <div class="single-form">
+                <input type="text" class="form-control" name="exp" placeholder="Inserte su expediente" >
+            </div>
+            <!-- Single Form Start -->
+            <div class="single-form">
+                <input type="password" class="form-control" name="password" placeholder="Inserte su contraseña" >   
+            </div>
+            <!-- Single Form End -->
+            <div class="single-form">
+                <input type="password" class="form-control" name="confirm_password" placeholder="Repita su contraseña" >     
+            </div>
+            <!-- Single Form Start -->
+            <div class="single-form">
+                <button class="btn btn-primary btn-hover-dark w-100">Login</button>
+            </div>
+            <!-- Single Form End -->
+            
+        </form>
+        
+        
+    </div>

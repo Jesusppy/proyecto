@@ -1,5 +1,6 @@
 const path = require('path');
 const Users = require('../models/User');
+const { isAuthenticated } = require('../helpers/auth');
 
 const passport = require('passport');
 
@@ -16,7 +17,7 @@ exports.postSignIn = passport.authenticate('local', {
 });
 
 exports.getSignUp = (req, res) => {  
-    res.render('users/signup')
+    res.render('users/signupNEW')
 };
 
 exports.postSignUp = async (req,res) => {
@@ -32,7 +33,7 @@ exports.postSignUp = async (req,res) => {
         errors.push({ text: 'Password must be at least 4 characters'});
     }
     if (errors.length > 0 ) {
-        res.render('users/signup', {
+        res.render('users/signupNEW', {
             errors,
             name,
             exp,
@@ -42,9 +43,10 @@ exports.postSignUp = async (req,res) => {
         });
      } else {
          const emailUser = await Users.findOne({email: email});
-        if (emailUser) {
-             req.flash('error_msg', 'Email is already in use');
-             res.redirect('/users/signup');
+        if  (emailUser) {
+             req.flash('error_msg', 'The email is already registered');
+             res.redirect('/users/signupNEW');
+             
         }
             const newUser = new Users({
                 name,
@@ -70,13 +72,13 @@ exports.roleUser = async (req, res) => {
 exports.getProfileUser = async (req, res) => {
     const id = req.params.id;
     const user = await Users.findById(id);
-    res.render('users/profile', {user});
+    res.render('users/profileNEW', {user});
 };
 
 exports.editProfileUser = async (req, res) => { 
     const { id } = req.params;
     const user = await Users.findById(id);
-    res.render('users/edit', {user});
+    res.render('users/editNEW', {user});
 };
 
 exports.updateProfileUser = async (req, res) => {

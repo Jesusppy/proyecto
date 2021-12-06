@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>EduCa</title>
     <meta name="robots" content="noindex, follow" />
@@ -10,6 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/public/images/favicon.ico">
+
+    <link rel="stylesheet" href="https://bootswatch.com/5/yeti/bootstrap.min.css">
+
+    <head>
+        <script src="https://kit.fontawesome.com/f8294d8a77.js" crossorigin="anonymous"></script>
+    </head>
 
     <!-- CSS
 	============================================ -->
@@ -42,9 +47,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 
-    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
-    <!-- <link rel="stylesheet" href="/public/css/vendor/plugins.min.css">
-    <link rel="stylesheet" href="/public/css/style.min.css"> -->
+    <script src="/public/js2/scripts.js" charset="UTF-8"></script>
 
 </head>
 
@@ -108,7 +111,7 @@
             <!-- Sidebar Wrapper Start -->
             <div class="sidebar-wrapper">
                 <div class="menu-list">
-                    <a class="active" href="/admin/homeworks"><img src="/public/images/menu-icon/icon-1.png" alt="Icon"></a>
+                    <a class="active" href="/homeworks"><img src="/public/images/menu-icon/icon-1.png" alt="Icon"></a>
                     <a href="/images"><img src="/public/images/menu-icon/icon-2.png" alt="Icon"></a>
                     <a href="/simulator"><img src="/public/images/menu-icon/icon-3.png" alt="Icon"></a>
                 </div>
@@ -125,52 +128,62 @@
                 <div class="main-content-wrapper pb-0">
                     <div class="container-fluid">
 
+                        <!-- Admin Top Bar Start -->
 
                         <!-- Admin Top Bar End -->
 
                         <!-- Question & Answer End -->
                         <div class="question-answer">
-                            <div class="card-header">
-                                Asignación de Tareas
-                        </div>
+
                             <div class="row">
 
+                                <div class="col-xl-8">
 
-
-                                <form action="/homework/new-homework" method="POST" enctype="multipart/form-data">
-                                            <div class="single-form">
-                                                <input type="text" class="form-control" name="title" placeholder="Insertar un titulo" required>          
-                                            </div>
-                                            <div class="single-form">
-                                                <textarea name="description" rows="4" id="MyID"></textarea>
-                                            </div>
-                        
-                                            <input type="text" placeholder="Fecha estimada"  name="datefilter" />
-                                            
-                                            <div class="single-form">
-                                                <div class="form-group">
-                                                    <div class="custom-file">
-                                                     <input type="file" name="image" class="custom-file-input" id="inputGroupFile04"
-                                                            aria-describedby="inputGroupFileAddon04" required>
-                                                    <label class="custom-file-label" for="inputGroupFile04">Seleccionar archivo</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                        
-                                            <div class="form-group">
-                                                <button type="Submit" class="btn btn-primary btn-block"> 
-                                                    Subir
-                                                </button>
-                                            </div>
-                                            
-                        
-                                        </form>
-                                        
-                                        
-
-
+                                    <!-- Answer Message Wrapper Start -->
+                                    <div class="container">
+                                        <div class="cold-md-9">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>User</th>
+                                                        <th>Role</th>
+                                                        <th>Options</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (var i=0; i< users.length; i++) {%> 
+                                                        <tr>
+                                                            <td> <%= i+1 %> </td>
+                                                            <td><a href="/users/<%= users[i]._id %> " ><%= users[i].name %> </a> </td>
+                                                            <td>
+                                                                <select class="user-role" data-id="<%= users[i].id  %> " value="<%= users[i].role %>">
+                                                                    <option value="student" <% if(users[i].role === 'student') {%>selected<%}%>>Student</option>
+                                                                    <option value="professor" <% if(users[i].role === 'professor') {%>selected<%}%>>Professor</option>
+                                                                    <option value="admin" <% if(users[i].role === 'admin') {%>selected<%}%>>Admin</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                    
+                                                                <a href="/home/admin/edit/<%= users[i].id %> " class="btn btn-info">
+                                                                    Edit
+                                                                </a>
+                                                                <form action="/users/delete/<%= users[i]._id %>?_method=DELETE" method="POST">
+                                                                    <input type="hidden" name="_method" value="DELETE">
+                                                                    <button class="btn btn-danger btn-block btn-sm" type="submit">
+                                                                        Delete
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    <% } %> 
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                     <!-- Answer Message Wrapper End -->
 
+                                </div>
                             </div>
 
                         </div>
@@ -189,7 +202,7 @@
         <div class="section footer-section">
 
             <!-- Footer Widget Section Start -->
-          
+            
             <!-- Footer Widget Section End -->
 
             <!-- Footer Copyright Start -->
@@ -205,7 +218,8 @@
                             <a href="#">Security</a>
                         </div>
                         <div class="copyright-text">
-                            <p>&copy; 2021 <span> Edule </span> Made with <i class="icofont-heart-alt"></i> by <a href="#">Codecarnival</a></p>
+                            <p>&copy; 2021 <span> Edule </span> Made with <i class="icofont-heart-alt"></i> by <a
+                                    href="#">Codecarnival</a></p>
                         </div>
                     </div>
                     <!-- Footer Copyright End -->
@@ -224,34 +238,30 @@
         <!--Back To End-->
 
     </div>
-    <script type="text/javascript">
-        $(function() {
-        
-            $('input[name="datefilter"]').daterangepicker({
-                autoUpdateInput: false,
-                locale: {
-                    cancelLabel: 'Clear'
-                }
-            });
-        
-            $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-            });
-        
-            $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-                $(this).val('');
-            });
-        
-        });
-    </script>
-
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
         });
     </script>
-    
+
+
+<script>
+    $(function(){
+        $('.user-role').change(function(){
+            let id = $(this).data('id');
+            let role = $(this).val();
+            let payload = JSON.stringify({id, role});
+            $.ajax({
+                url: '/users/edit',
+                type: 'PUT',
+                data: payload,
+                dataType: 'json',
+                contentType: 'application/json',
+            });
+        });
+    });
+</script>
 
 
 
@@ -280,19 +290,28 @@
     <!-- Main JS -->
     <script src="/public/js/main.js"></script>
 
+    <script src="/public/js/main.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+
+
+<!-- Custom code -->
+
+<script src="/public/js/scripts.js" charset="UTF-8"></script>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
+
 </body>
 
 </html>

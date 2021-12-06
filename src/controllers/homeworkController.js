@@ -100,7 +100,8 @@ exports.postAnswerController = async (req, res) => {
 
 exports.getAnswerController = async (req, res) => {
     const id = req.params.id;
-    //const answers= await Note.find({user : req.user.id}).sort({date: 'desc'}).lean();        
+ 
+    
     const homework = await Homeworks.findOne({ _id: id }).populate('professor file');
     if (req.user.role === 'professor' || req.user.role === 'admin') {
         const answers = await Answers.find({ homework: id }).populate('student file');
@@ -180,11 +181,10 @@ exports.putEditHomework = async (req, res) => {
 };
 
 exports.putScoreAnswer = async (req, res) => {
-    console.log('Entreee');
     const { score } = req.body;
     await Answers.findByIdAndUpdate(req.params.id, { score }, { new: true });
     req.flash('success_msg', 'Puntuación actualizada');
-    res.redirect('/homeworks');
+    res.redirect('/admin/homeworks');
 };  
 
 

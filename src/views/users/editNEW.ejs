@@ -2,14 +2,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>EduCa</title>
+    <title>EduCA</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/public/images/favicon.ico">
+
+    <link rel="stylesheet" href="https://bootswatch.com/5/yeti/bootstrap.min.css">
+
+    <head>
+        <script src="https://kit.fontawesome.com/f8294d8a77.js" crossorigin="anonymous"></script>
+    </head>
 
     <!-- CSS
 	============================================ -->
@@ -42,15 +48,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 
-    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
-    <!-- <link rel="stylesheet" href="/public/css/vendor/plugins.min.css">
-    <link rel="stylesheet" href="/public/css/style.min.css"> -->
+    <script src="/public/js2/scripts.js" charset="UTF-8"></script>
 
 </head>
 
 <body>
 
-    <div class="main-wrapper main-wrapper-02">
+    <div class="main-wrapper main-wrapper-1">
 
         <!-- Login Header Start -->
         <div class="section login-header">
@@ -65,13 +69,7 @@
 
                 <!-- Header Search Start -->
                 <div class="login-header-search dropdown">
-                    <button class="search-toggle" data-bs-toggle="dropdown"><i class="flaticon-loupe"></i></button>
-
-                    <div class="search-input dropdown-menu">
-                        <form action="#">
-                            <input type="text" placeholder="Search here">
-                        </form>
-                    </div>
+                   
 
                 </div>
                 <!-- Header Search End -->
@@ -106,7 +104,7 @@
         <div class="section overflow-hidden position-relative" id="wrapper">
 
             <!-- Sidebar Wrapper Start -->
-            <div class="sidebar-wrapper">
+            <div class="sidebar-wrapper float-left">
                 <div class="menu-list">
                     <a class="active" href="/admin/homeworks"><img src="/public/images/menu-icon/icon-1.png" alt="Icon"></a>
                     <a href="/images"><img src="/public/images/menu-icon/icon-2.png" alt="Icon"></a>
@@ -115,66 +113,69 @@
             </div>
             <!-- Sidebar Wrapper End -->
 
-            <div class="page-content-wrapper py-0">
+            <div class="page-content-wrapper py-100">
 
                 <!-- Admin Tab Menu Start -->
 
                 <!-- Admin Tab Menu End -->
 
                 <!-- Page Content Wrapper Start -->
-                <div class="main-content-wrapper pb-0">
+                <div class="main-content-wrapper">
                     <div class="container-fluid">
 
+                        <!-- Admin Top Bar Start -->
 
                         <!-- Admin Top Bar End -->
 
-                        <!-- Question & Answer End -->
-                        <div class="question-answer">
-                            <div class="card-header">
-                                Asignación de Tareas
+                        <!-- Message Start -->
+                        
+                        <!-- Message End -->
+
+                        <!-- Courses Rating Wrapper Start -->
+                        <div class="courses-rating-wrapper py-10">
+
+                            <!-- Single Courses Rating Start -->
+                            <div class="courses-rating-wrapper py-10">
+
+                                <!-- Single Courses Rating Start -->
+                                <div class="col-md-8 mx-auto">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3>Edita tu perfil</h3>
+                                        </div>
+                                        <div class="card-body">
+                                                <form action="/users/edit/<%= user.id %>?_method=PUT" method="POST">
+                                                        <input type="hidden" name="_method" value="PUT">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <div class="form-group">
+                                                            <label for="name">Nombre</label>
+                                                            <input type="text" class="form-control" id="name" name="name" value="<%= user.name %>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="email">Email</label>
+                                                            <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password">Contraseña</label>
+                                                            <input type="password" class="form-control" id="password" name="password">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="password_confirmation">Confirmar contraseña</label>
+                                                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                                    </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            
+                            
+                            <!-- Single Courses Rating End -->
+
+
                         </div>
-                            <div class="row">
-
-
-
-                                <form action="/homework/new-homework" method="POST" enctype="multipart/form-data">
-                                            <div class="single-form">
-                                                <input type="text" class="form-control" name="title" placeholder="Insertar un titulo" required>          
-                                            </div>
-                                            <div class="single-form">
-                                                <textarea name="description" rows="4" id="MyID"></textarea>
-                                            </div>
-                        
-                                            <input type="text" placeholder="Fecha estimada"  name="datefilter" />
-                                            
-                                            <div class="single-form">
-                                                <div class="form-group">
-                                                    <div class="custom-file">
-                                                     <input type="file" name="image" class="custom-file-input" id="inputGroupFile04"
-                                                            aria-describedby="inputGroupFileAddon04" required>
-                                                    <label class="custom-file-label" for="inputGroupFile04">Seleccionar archivo</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                        
-                                            <div class="form-group">
-                                                <button type="Submit" class="btn btn-primary btn-block"> 
-                                                    Subir
-                                                </button>
-                                            </div>
-                                            
-                        
-                                        </form>
-                                        
-                                        
-
-
-                                    <!-- Answer Message Wrapper End -->
-
-                            </div>
-
-                        </div>
-                        <!-- Question & Answer End -->
+                        <!-- Courses Rating Wrapper End -->
 
                     </div>
                 </div>
@@ -183,13 +184,15 @@
             </div>
 
         </div>
+        </div>
+        
         <!-- Courses Admin End -->
 
         <!-- Footer Start  -->
         <div class="section footer-section">
 
             <!-- Footer Widget Section Start -->
-          
+            
             <!-- Footer Widget Section End -->
 
             <!-- Footer Copyright Start -->
@@ -205,7 +208,8 @@
                             <a href="#">Security</a>
                         </div>
                         <div class="copyright-text">
-                            <p>&copy; 2021 <span> Edule </span> Made with <i class="icofont-heart-alt"></i> by <a href="#">Codecarnival</a></p>
+                            <p>&copy; 2021 <span> Edule </span> Made with <i class="icofont-heart-alt"></i> by <a
+                                    href="#">Codecarnival</a></p>
                         </div>
                     </div>
                     <!-- Footer Copyright End -->
@@ -224,34 +228,10 @@
         <!--Back To End-->
 
     </div>
-    <script type="text/javascript">
-        $(function() {
-        
-            $('input[name="datefilter"]').daterangepicker({
-                autoUpdateInput: false,
-                locale: {
-                    cancelLabel: 'Clear'
-                }
-            });
-        
-            $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
-                $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
-            });
-        
-            $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
-                $(this).val('');
-            });
-        
-        });
-    </script>
 
 
-    <script>
-        $(document).ready(function() {
-            var simplemde = new SimpleMDE({ element: $("#MyID")[0] });
-        });
-    </script>
-    
+
+
 
 
 
@@ -280,19 +260,27 @@
     <!-- Main JS -->
     <script src="/public/js/main.js"></script>
 
+    <script src="/public/js/main.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
+
+
+<!-- Custom code -->
+
+<script src="/public/js/scripts.js" charset="UTF-8"></script>
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
 </body>
 
 </html>
