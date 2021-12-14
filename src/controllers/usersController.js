@@ -66,7 +66,9 @@ exports.roleUser = async (req, res) => {
     const id = req.body.id.trim();
     const role = req.body.role;
     await Users.findByIdAndUpdate(id, {role});
-    res.json({})
+    res.json({ ok: true });
+    
+
 };
 
 exports.getProfileUser = async (req, res) => {

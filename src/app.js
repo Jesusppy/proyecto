@@ -16,12 +16,15 @@ require('./config/passport');
 
 // Connecting to db
 
-mongoose.connect('mongodb://localhost/proyecto', {
+const atlasURL = 'mongodb+srv://jesusppy:Nz67pjwPCEtypB9@cluster0.kpswc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+
+mongoose.connect(atlasURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
     .then(db => console.log('db connected'))
     .catch(err => console.log(err));
+
 
 // Importing routes
 
