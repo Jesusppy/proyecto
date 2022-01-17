@@ -20,7 +20,7 @@ const multer = require('multer');
 
 const app = express();
 require('./config/passport');
-require('./config/database');
+require('./database');
 
 
 // Connecting to db
