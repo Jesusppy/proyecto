@@ -1,3 +1,10 @@
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
+
+require('dotenv').config();
+
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
@@ -13,17 +20,11 @@ const multer = require('multer');
 
 const app = express();
 require('./config/passport');
+require('./config/database');
+
 
 // Connecting to db
 
-const atlasURL = 'mongodb+srv://jesusppy:Nz67pjwPCEtypB9@cluster0.kpswc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-
-mongoose.connect(atlasURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(db => console.log('db connected'))
-    .catch(err => console.log(err));
 
 
 // Importing routes
@@ -33,6 +34,7 @@ mongoose.connect(atlasURL, {
 // Settings
 
 app.set('port', process.env.PORT || 3000);
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
