@@ -8,7 +8,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const multer = require('multer');
 
-require('dotenv').config({ path : path.join(__dirname, './variables.env') });
+require('dotenv').config({ path : path.join(__dirname, '/variables.env') });
 console.log(process.env.DB_URL);
 
 const app = express();
@@ -26,13 +26,6 @@ mongoose.connect(process.env.DB_URL, {
 })
     .then(db => console.log('db connected'))
     .catch(err => console.log(err)); 
-    
-    
-
-
-// Importing routes
-
-
 
 // Settings
 
