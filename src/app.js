@@ -6,7 +6,6 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const passport = require('passport');
-const errorhandler = require('errorhandler');
 const multer = require('multer');
 
 require('dotenv').config({ path : path.join(__dirname, './variables.env') });
