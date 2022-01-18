@@ -1,10 +1,3 @@
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config();
-}
-
-
-require('dotenv').config();
-
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
@@ -16,15 +9,26 @@ const passport = require('passport');
 const errorhandler = require('errorhandler');
 const multer = require('multer');
 
-
+require('dotenv').config({ path : path.join(__dirname, './variables.env') });
+console.log(process.env.DB_URL);
 
 const app = express();
+
 require('./config/passport');
-require('./database');
+
 
 
 // Connecting to db
 
+mongoose.connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+    
+})
+    .then(db => console.log('db connected'))
+    .catch(err => console.log(err)); 
+    
+    
 
 
 // Importing routes
@@ -76,10 +80,13 @@ app.use(require('./controllers/imageController'));
 app.use(require('./routes/tasks.routes'));
 app.use(require('./routes/notes.routes'));
 app.use(require('./routes/users.routes'));
-// app.use(require('./routes/images.routes'));
 
 
 // Starting server
-app.listen(app.get('port'), () => {
-    console.log(`Server on port ${app.get('port')}`);
+
+const host = process.env.HOST || '0.0.0.0';
+const port = process.env.PORT || 3000;
+
+app.listen(port, host, () => {
+    console.log(`Server on port ${port}`);
 });
