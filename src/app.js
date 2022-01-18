@@ -8,7 +8,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const multer = require('multer');
 
-require('dotenv').config({ path : path.join(__dirname, '/variables.env') });
+require('dotenv').config({ path : path.join(__dirname, 'variables.env') });
 console.log(process.env.DB_URL);
 
 const app = express();
@@ -76,9 +76,6 @@ app.use(require('./routes/users.routes'));
 
 // Starting server
 
-const host = process.env.HOST || '0.0.0.0';
-const port = process.env.PORT || 3000;
-
-app.listen(port, host, () => {
-    console.log('Base de datos conectada');
-});
+app.listen(process.env.PORT || 3000, function(){
+    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  });
